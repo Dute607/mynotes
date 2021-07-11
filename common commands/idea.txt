@@ -1,0 +1,5 @@
+##Ctrl+鼠标滚轮控制字体大小
+Setting-->Keymap-->Editor Actions-->Decrease Font Size-->Right-Click-->Add Mouse Shortcut
+
+##回到原来光标所在位置
+Ctrl+Alt+←/→方向键

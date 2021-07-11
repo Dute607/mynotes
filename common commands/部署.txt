@@ -1,0 +1,27 @@
+JDK:
+tar -zxvf jdk-8u271-linux-x64.tar.gz
+vim /etc/profile
+在最后加上
+export JAVA_HOME=/app/jdk/jdk1.8.0_271
+export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib:$CLASSPATH
+export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
+source /etc/profile
+
+TOMCAT:
+tar -zxvf apache-tomcat-8.5.47.tar.gz
+vim /etc/profile
+在最后加上
+export CATALINA_HOME=/app/apache-tomcat-8.5.47
+source /etc/profile
+
+vim server.xml
+在Connector 8080端口后面加上：URIEncoding="UTF-8"
+
+vim tomcat-users.xml
+在最后加上
+  <role rolename ="manager-gui"/>
+  <role rolename ="manager-status"/>
+  <role rolename ="manager-script"/>
+  <role rolename ="admin-gui"/>
+  <role rolename ="admin-script"/>
+  <user username ="admin" password ="admin" roles ="manager-gui,manager-status,manager-script,admin-gui,admin-script"/>

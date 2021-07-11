@@ -1,0 +1,66 @@
+which bash
+cat /etc/shells
+history
+
+#编辑当前用户的环境变量
+vim ~/.bash_profile
+source ~/.bash_profile
+
+###START###Linux安装oracle客户端###
+1.下载oracle客户端安装包：
+http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html
+instantclient-basic-linux.x64-21.1.0.0.0.zip
+instantclient-sqlplus-linux.x64-21.1.0.0.0.zip
+安装解压缩到/usr/local/oracle
+mkdir /usr/local/oracle
+unzip /usr/local/oracle/instantclient-basic-linux.x64-11.2.0.4.0.zip
+unzip /usr/local/oracle/instantclient-sqlplus-linux.x64-11.2.0.4.0.zip
+
+2.创建监听程序
+cd /usr/local/oracle/instantclient_11_2
+mkdir -p network/admin
+cd network/admin
+新建tnsnames.ora文件：
+ORCL =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = 10.12.11)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = orcl)
+    )
+  )
+  
+3.添加环境变量
+vi .bash_profile
+export ORACLE_HOME=/usr/local/oracle/instantclient_11_2
+export TNS_ADMIN=$ORACLE_HOME/network/admin
+##export NLS_LANG=AMERICAN_AMERICA.ZHS16GBK
+export NLS_LANG=AMERICAN_AMERICA.AL32UTF8
+export LD_LIBRARY_PATH=$ORACLE_HOME
+export PATH=$ORACLE_HOME:$PATH
+执行环境变量
+source .bash_profile
+测试数据库连接
+sqlplus username/passwd@cm
+
+4.可能出现的问题
+升级glibc服务：
+https://blog.csdn.net/wngpenghao/article/details/87918493
+查看服务器执行的glibc版本  strings /lib64/libc.so.6 |grep GLIBC_
+下载
+wget http://ftp.gnu.org/gnu/glibc/glibc-2.14.tar.gz
+wget http://ftp.gnu.org/gnu/glibc/glibc-ports-2.14.tar.gz
+解压
+tar -xvf  glibc-2.14.tar.gz
+tar -xvf  glibc-ports-2.14.tar.gz
+编译(时长较久)
+mv glibc-ports-2.14 glibc-2.14/ports
+mkdir glibc-2.14/build
+cd glibc-2.14/build 
+../configure  --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin
+make
+安装
+make install
+查看软链接指向
+ll /lib64/libc.so.6
+###END###Linux安装oracle客户端###
