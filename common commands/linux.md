@@ -16,7 +16,7 @@ history #查看历史命令
   vim /etc/profile
   source /etc/profile
   ````
-###Linux安装oracle客户端
+### Linux安装oracle客户端
 1. 下载oracle客户端安装包：  
   http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html  
   instantclient-basic-linux.x64-21.1.0.0.0.zip  
