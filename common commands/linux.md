@@ -1,3 +1,4 @@
+[TOC]
 ### 常用命令
 ````shell
 which bash #查看bash路径
